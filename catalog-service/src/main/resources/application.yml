@@ -6,7 +6,7 @@ spring:
     name: catalog-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3302/catalog
+    url: jdbc:mysql://127.0.0.1:3302/catalog?serverTimezone=UTC&characterEncoding=UTF-8
     username: catalog
     password: 1234
     hikari:
@@ -18,8 +18,10 @@ spring:
     show-sql: true
     generate-ddl: true
     database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create-drop
+      format_sql: true
+      ddl-auto: update
   security:
     user:
       name: username
@@ -31,7 +33,12 @@ spring:
 logging:
   level:
     org:
-      springframework: DEBUG
+      hibernate:
+        SQL: DEBUG
+        type:
+          dyscription:
+            sql:
+              BasicBinder: TRACE
 
 eureka:
   instance:

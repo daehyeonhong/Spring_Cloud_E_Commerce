@@ -17,7 +17,7 @@ import java.util.Date;
 public class CatalogEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_catalog")
     private Long id;
 
     @Column(nullable = false, length = 120, unique = true)
