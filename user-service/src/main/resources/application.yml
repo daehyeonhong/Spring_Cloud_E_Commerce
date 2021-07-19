@@ -1,0 +1,46 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3301/user
+    username: user
+    password: 1234
+    hikari:
+      connection-test-query: SELECT NOW() FROM DUAL
+      auto-commit: true
+  messages:
+    basename: messages
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+  security:
+    user:
+      name: username
+      password: passw0rd!
+  devtools:
+    livereload:
+      enabled: true
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+greeting:
+  message: Welcome to the Simple E-Commerce
