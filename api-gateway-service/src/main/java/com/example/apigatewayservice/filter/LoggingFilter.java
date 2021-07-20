@@ -46,7 +46,8 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
 //                }
 //            }));
 //        };
-        GatewayFilter filter = new OrderedGatewayFilter((exchange, chain) -> {
+
+        return new OrderedGatewayFilter((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             ServerHttpResponse response = exchange.getResponse();
 
@@ -62,8 +63,6 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
                 }
             }));
         }, Ordered.LOWEST_PRECEDENCE);
-
-        return filter;
     }
 
 }
