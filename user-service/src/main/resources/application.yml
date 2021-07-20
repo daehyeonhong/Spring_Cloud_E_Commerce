@@ -32,6 +32,9 @@ spring:
 
 logging:
   level:
+    com:
+      example:
+        userservice: DEBUG
     org:
       hibernate:
         SQL: DEBUG
@@ -51,3 +54,7 @@ eureka:
 
 greeting:
   message: Welcome to the Simple E-Commerce
+
+token:
+  expiration_time: 86400000
+  secret: salt*user_token*salt
