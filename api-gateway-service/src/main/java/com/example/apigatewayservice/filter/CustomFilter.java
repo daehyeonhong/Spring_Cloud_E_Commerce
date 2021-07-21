@@ -16,11 +16,6 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
         super(Config.class);
     }
 
-    public static class Config {
-        // Put the Configuration properties
-
-    }
-
     @Override
     public GatewayFilter apply(Config config) {
         // Custom Pre Filter
@@ -35,6 +30,11 @@ public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Conf
                     log.info("Custom POST filter: response code -> {}", serverHttpResponse.getStatusCode()
                     )));
         };
+    }
+
+    public static class Config {
+        // Put the Configuration properties
+
     }
 
 }

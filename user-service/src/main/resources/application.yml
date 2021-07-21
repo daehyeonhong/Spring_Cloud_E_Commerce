@@ -2,6 +2,11 @@ server:
   port: 0
 
 spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   application:
     name: user-service
   datasource:
@@ -55,6 +60,11 @@ eureka:
 greeting:
   message: Welcome to the Simple E-Commerce
 
-token:
-  expiration_time: 86400000
-  secret: salt*user_token*salt
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh
+#token:
+#  expiration_time: 86400000
+#  secret: salt*user_token*salt

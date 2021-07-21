@@ -17,14 +17,6 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
         super(Config.class);
     }
 
-    @Data
-    public static class Config {
-        // Put the Configuration properties
-        private String baseMessage;
-        private boolean PreLogger;
-        private boolean PostLogger;
-    }
-
     @Override
     public GatewayFilter apply(Config config) {
         // Global Pre Filter
@@ -44,6 +36,14 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
                 }
             }));
         };
+    }
+
+    @Data
+    public static class Config {
+        // Put the Configuration properties
+        private String baseMessage;
+        private boolean PreLogger;
+        private boolean PostLogger;
     }
 
 }
