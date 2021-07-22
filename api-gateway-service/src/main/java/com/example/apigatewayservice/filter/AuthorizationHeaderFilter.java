@@ -1,6 +1,7 @@
 package com.example.apigatewayservice.filter;
 
 import io.jsonwebtoken.Jwts;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -19,6 +20,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
     private final Environment environment;
 
+    @Builder
     public AuthorizationHeaderFilter(Environment environment) {
         super(Config.class);
         this.environment = environment;

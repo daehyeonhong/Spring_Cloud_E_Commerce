@@ -1,17 +1,21 @@
 package com.example.userservice.service;
 
+import com.example.userservice.OrderCServiceClient;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.repository.UserEntity;
 import com.example.userservice.repository.UserRepository;
+import com.example.userservice.vo.ResponseOrder;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -20,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    //    private final RestTemplate restTemplate;
+    private final Environment environment;
+    private final OrderCServiceClient orderCServiceClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -60,8 +67,25 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User not found!");
 
         UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
-        userDto.setOrders(new ArrayList<>());
+//        userDto.setOrders(new ArrayList<>());
 
+        /**
+         * Using as RESTTemplate
+         */
+//        String orderUrl = String.format(
+//                Objects.requireNonNull(environment.getProperty("order_service.url")), userId
+//        );
+//        ResponseEntity<List<ResponseOrder>> listResponseEntity = restTemplate.exchange(
+//                orderUrl, HttpMethod.GET,
+//                null, new ParameterizedTypeReference<List<ResponseOrder>>() {
+//                });
+//        List<ResponseOrder> orders = listResponseEntity.getBody();
+
+        /**
+         * Using Feign Client
+         */
+        final List<ResponseOrder> orders = orderCServiceClient.getOrders(userId);
+        userDto.setOrders(orders);
         return userDto;
     }
 

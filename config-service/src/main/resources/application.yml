@@ -10,21 +10,21 @@ spring:
   application:
     name: config-service
   profiles:
-    active: git
+    active: native
   cloud:
     config:
       server:
-        #        native:
-        #          search-locations: file://${user.home}
-        git:
-          uri: https://github.com/daehyeonhong/spring-config-comfig.git
-          default-label: main
+        native:
+          search-locations: file:\${user.home}\dev\workspace\native-file-repo
+#        git:
+#          uri: https://github.com/daehyeonhong/spring-config-comfig.git
+#          default-label: main
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh, busrefresh
+        include: health, refresh, busrefresh
 #          username:
 #          passphrase:
 #          uri: file://C:\dev\workspace\git-local-repo

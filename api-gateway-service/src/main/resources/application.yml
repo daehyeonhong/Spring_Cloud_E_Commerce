@@ -58,10 +58,10 @@ spring:
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/order-service/**
-        - id: order-service
+        - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user-service/actuator
+            - Path=/user-service/actuator/**
             - Method=GET,POST
           filters:
             - RemoveRequestHeader=Cookie

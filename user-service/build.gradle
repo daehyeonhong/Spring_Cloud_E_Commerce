@@ -31,6 +31,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'org.modelmapper:modelmapper:2.3.8'
     compileOnly 'org.projectlombok:lombok'
