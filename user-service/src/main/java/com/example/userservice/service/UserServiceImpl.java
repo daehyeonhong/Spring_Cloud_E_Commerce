@@ -1,11 +1,11 @@
 package com.example.userservice.service;
 
-import com.example.userservice.OrderCServiceClient;
+import com.example.userservice.client.OrderCServiceClient;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.repository.UserEntity;
 import com.example.userservice.repository.UserRepository;
-import com.example.userservice.vo.ResponseOrder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.core.env.Environment;
@@ -15,11 +15,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -69,9 +69,7 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
 //        userDto.setOrders(new ArrayList<>());
 
-        /**
-         * Using as RESTTemplate
-         */
+        // Using as RESTTemplate
 //        String orderUrl = String.format(
 //                Objects.requireNonNull(environment.getProperty("order_service.url")), userId
 //        );
@@ -81,11 +79,19 @@ public class UserServiceImpl implements UserService {
 //                });
 //        List<ResponseOrder> orders = listResponseEntity.getBody();
 
-        /**
-         * Using Feign Client
+        /*
+          Using Feign Client
+          Feign exception handling
          */
-        final List<ResponseOrder> orders = orderCServiceClient.getOrders(userId);
-        userDto.setOrders(orders);
+//        List<ResponseOrder> orders = null;
+//        try {
+//            orders = orderCServiceClient.getOrders(userId);
+//        } catch (FeignException e) {
+//            log.error(e.getMessage());
+//        }
+
+        // ErrorDecoder
+        userDto.setOrders(orderCServiceClient.getOrders(userId));
         return userDto;
     }
 

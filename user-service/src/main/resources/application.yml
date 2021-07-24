@@ -36,7 +36,8 @@ logging:
   level:
     com:
       example:
-        userservice: DEBUG
+        userservice:
+          client: DEBUG
     org:
       hibernate:
         SQL: DEBUG
