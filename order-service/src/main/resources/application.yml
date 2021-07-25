@@ -4,14 +4,14 @@ server:
 spring:
   application:
     name: order-service
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://127.0.0.1:3306/shop?serverTimezone=UTC&characterEncoding=UTF-8
-#    username: admin
-#    password: 1234
-#    hikari:
-#      connection-test-query: SELECT NOW() FROM DUAL
-#      auto-commit: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/shop?serverTimezone=UTC&characterEncoding=UTF-8
+    username: admin
+    password: 1234
+    hikari:
+      connection-test-query: SELECT NOW() FROM DUAL
+      auto-commit: true
   messages:
     basename: messages
   jpa:
