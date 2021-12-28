@@ -1,5 +1,5 @@
 encrypt:
-#  key: abcdefghijklmnopqrstuvwxyz0123456789
+  #  key: abcdefghijklmnopqrstuvwxyz0123456789
   key-store:
     location: file:\${user.home}\dev\workspace\keystore\apiEncryptionKey.jks
     password: test1234
